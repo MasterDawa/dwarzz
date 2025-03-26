@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Permanent+Marker&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #121212;
+  --color-primary: #ff4d00;
+  --color-secondary: #4169e1;
+  --color-text: #f5f5f5;
+  --color-danger: #ff0033;
+  --color-success: #00cc66;
+  --color-warning: #ffcc00;
+  --font-main: 'Roboto', sans-serif;
+  --font-display: 'Permanent Marker', cursive;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  position: relative;
+}
+
+/* Background image for the start screen is now handled in StartScreen.js component */
+
+button {
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ad-container {
+  height: 100%;
+  width: 160px;
+  background-color: rgba(40, 40, 40, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+} 
