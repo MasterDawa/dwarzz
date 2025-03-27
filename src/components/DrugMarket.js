@@ -184,7 +184,7 @@ const AmountInput = styled.input`
 
 const DrugMarket = () => {
   const dispatch = useDispatch();
-  const { money = 0, inventory = {}, currentLocation = 'manhattan', btc = 0 } = useSelector(state => state.player);
+  const { money = 0, inventory = {}, currentLocation = 'manhattan' } = useSelector(state => state.player);
   const { prices = {} } = useSelector(state => state.game);
   const { quests = {}, activeQuestIds = [] } = useSelector(state => state.quests);
   
