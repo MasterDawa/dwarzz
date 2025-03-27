@@ -1,10 +1,10 @@
-# Drug Wars
+# Hustle City
 
 A text-based RPG strategy game inspired by the classic "Drug Wars" game from the 1980s, built with modern web technologies.
 
 ## About
 
-Drug Wars is a turn-based strategy game where players act as drug dealers in New York City, buying and selling drugs, traveling between locations, managing resources, and dealing with random events.
+Hustle City is a turn-based strategy game where players act as drug dealers in New York City, buying and selling drugs, traveling between locations, managing resources, and dealing with random events.
 
 **Note:** This game is purely fictional and does not promote or endorse illegal activities. It's a strategy game focused on resource management and risk assessment.
 
