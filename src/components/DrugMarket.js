@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { updateMoney, updateInventory, updateBTC } from '../store/playerSlice';
+import { updateMoney, updateInventory, updateBTC, addMiningRig } from '../store/playerSlice';
 import { addMessage } from '../store/gameSlice';
 import { updateQuestProgress } from '../store/questSlice';
 
@@ -184,7 +184,12 @@ const AmountInput = styled.input`
 
 const DrugMarket = () => {
   const dispatch = useDispatch();
-  const { money = 0, inventory = {}, currentLocation = 'manhattan' } = useSelector(state => state.player);
+  const { 
+    money = 0, 
+    inventory = {}, 
+    currentLocation = 'manhattan',
+    miningRigs = { basic: 0, advanced: 0 }
+  } = useSelector(state => state.player);
   const { prices = {} } = useSelector(state => state.game);
   const { quests = {}, activeQuestIds = [] } = useSelector(state => state.quests);
   
@@ -340,7 +345,7 @@ const DrugMarket = () => {
     {
       id: 'miningRig',
       name: 'Basic Mining Rig',
-      description: 'Set up a basic Bitcoin mining operation',
+      description: `Set up a basic Bitcoin mining operation (Owned: ${miningRigs.basic})`,
       price: 5000,
       btcPerDay: 0.01,
       action: () => {
@@ -349,14 +354,14 @@ const DrugMarket = () => {
           return;
         }
         dispatch(updateMoney(-5000));
-        dispatch(updateBTC(0.01));
-        dispatch(addMessage("You've set up a basic mining rig. Generating 0.01 BTC per day."));
+        dispatch(addMiningRig({ type: 'basic' }));
+        dispatch(addMessage(`You've set up a basic mining rig. You now own ${miningRigs.basic + 1} basic rigs, generating ${(miningRigs.basic + 1) * 0.01} BTC per day.`));
       }
     },
     {
       id: 'advancedRig',
       name: 'Advanced Mining Rig',
-      description: 'Upgrade to a more powerful mining setup',
+      description: `Upgrade to a more powerful mining setup (Owned: ${miningRigs.advanced})`,
       price: 15000,
       btcPerDay: 0.05,
       action: () => {
@@ -365,8 +370,8 @@ const DrugMarket = () => {
           return;
         }
         dispatch(updateMoney(-15000));
-        dispatch(updateBTC(0.05));
-        dispatch(addMessage("You've upgraded to an advanced mining rig. Generating 0.05 BTC per day."));
+        dispatch(addMiningRig({ type: 'advanced' }));
+        dispatch(addMessage(`You've upgraded to an advanced mining rig. You now own ${miningRigs.advanced + 1} advanced rigs, generating ${(miningRigs.advanced + 1) * 0.05} BTC per day.`));
       }
     },
     {

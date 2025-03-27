@@ -21,6 +21,10 @@ const initialState = {
     nightclub: false,
     bitcoinMine: false
   },
+  miningRigs: {
+    basic: 0,
+    advanced: 0
+  },
   combat: {
     attack: 10,
     defense: 5,
@@ -67,7 +71,21 @@ export const playerSlice = createSlice({
     },
     resetPlayer: () => initialState,
     loadPlayerState: (state, action) => {
-      return { ...action.payload };
+      return {
+        ...initialState,
+        ...action.payload,
+        miningRigs: action.payload.miningRigs || { basic: 0, advanced: 0 }
+      };
+    },
+    addMiningRig: (state, action) => {
+      const { type } = action.payload;
+      state.miningRigs[type] += 1;
+    },
+    generatePassiveBTC: (state) => {
+      const basicRigs = state.miningRigs.basic;
+      const advancedRigs = state.miningRigs.advanced;
+      const dailyBTC = (basicRigs * 0.01) + (advancedRigs * 0.05);
+      state.btc += dailyBTC;
     }
   }
 });
@@ -84,7 +102,9 @@ export const {
   addAsset,
   addWeapon,
   resetPlayer,
-  loadPlayerState
+  loadPlayerState,
+  addMiningRig,
+  generatePassiveBTC
 } = playerSlice.actions;
 
 export default playerSlice.reducer; 

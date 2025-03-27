@@ -13,6 +13,7 @@ import GameLog from './GameLog';
 // Utils
 import { autoSaveGame } from '../utils/localStorage';
 import { resetGame } from '../store/gameSlice';
+import { generatePassiveBTC } from '../store/playerSlice';
 
 const GameBackground = styled.div`
   position: relative;
@@ -119,6 +120,8 @@ const BackButton = styled.button`
 const GameContainer = () => {
   const dispatch = useDispatch();
   const gameState = useSelector(state => state);
+  const { day } = useSelector(state => state.game);
+  const { miningRigs = { basic: 0, advanced: 0 } } = useSelector(state => state.player);
   
   // Auto-save on any state change
   useEffect(() => {
@@ -128,6 +131,14 @@ const GameContainer = () => {
     
     return () => clearTimeout(saveTimer);
   }, [gameState]);
+  
+  // Handle BTC generation when day changes
+  useEffect(() => {
+    const totalRigs = (miningRigs?.basic || 0) + (miningRigs?.advanced || 0);
+    if (totalRigs > 0) {
+      dispatch(generatePassiveBTC());
+    }
+  }, [day, dispatch, miningRigs]);
   
   const handleBackToMain = () => {
     // Auto-save before going back to ensure game state is saved
