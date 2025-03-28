@@ -61,11 +61,11 @@ const GameLog = () => {
       <LogMessages>
         {messageHistory.length === 0 ? (
           <LogEntry>
-            <LogText>Welcome to Drug Wars. Your journey begins now.</LogText>
+            <LogText>Welcome to Hustle City Game. Your journey begins now.</LogText>
           </LogEntry>
         ) : (
           messageHistory.map((entry, index) => (
-            <LogEntry key={index}>
+            <LogEntry key={index}>S
               <LogDay>Day {entry.day}:</LogDay>
               <LogText>{entry.message}</LogText>
             </LogEntry>
